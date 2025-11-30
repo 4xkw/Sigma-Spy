@@ -38,9 +38,9 @@ local Players: Players = Services.Players
 --// Fetch Files module code
 local FilesScript
 if FilesConfig.UseWorkspace then
-	FilesScript = readfile(`{FilesConfig.Folder}/lib/Files.lua`)
+    FilesScript = readfile("lib/Files.lua")
 else
-	FilesScript = game:HttpGet(`{FilesConfig.RepoUrl}/lib/Files.lua`)
+    FilesScript = game:HttpGet(`{FilesConfig.RepoUrl}/lib/Files.lua`)
 end
 
 --// Load files module
@@ -53,8 +53,8 @@ Files:Init({
 --// Modules
 local Scripts = {
 	--// User configurations
-	Config = Files:GetModule("Sigma Spy/Config", "Config"),
-	ReturnSpoofs = Files:GetModule("Sigma Spy/Return spoofs", "Return Spoofs"),
+	Config = Files:GetModule("Sigma-Spy/Config", "Config"),
+	ReturnSpoofs = Files:GetModule("Sigma-Spy/Return spoofs", "Return Spoofs"),
 
 	--// Libraries
 	Process = Files:GetModule("lib/Process"),
