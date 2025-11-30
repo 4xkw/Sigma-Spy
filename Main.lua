@@ -19,8 +19,9 @@
 
 --// File handling configuration 
 local FilesConfig = {
-	UseWorkspace = false,
-	RepoUrl = "https://raw.githubusercontent.com/boowoompTheOffical/Sigma-Spy-Reuploaded/refs/heads/main" -- "http://127.0.0.1:3000"
+    UseWorkspace = true,
+    Folder = "Sigma-Spy",
+    RepoUrl = "https://raw.githubusercontent.com/4xkw/Sigma-Spy/refs/heads/main"
 }
 
 --// Service handlers
@@ -117,7 +118,7 @@ local ActorCode = Files:CompileModule(Scripts)
 ActorCode ..= [=[
 	local ExtraData = {
 		IsActor = true
-	}
+	}	
 	print("ChannelId", ...)
 	Libraries.Hook:BeginService(Libraries, ExtraData, ...)
 ]=]
