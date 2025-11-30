@@ -80,6 +80,7 @@ local function ProcessRemote(OriginalFunc, MetaMethod: string, self, Method: str
 end
 
 local function __IndexCallback(OriginalIndex, self, Method: string)
+    if typeof(self) ~= "Instance" then return end
 	--// Check if the orignal value is a function
 	local OriginalFunc = OriginalIndex(self, Method)
 	if typeof(OriginalFunc) ~= "function" then return end

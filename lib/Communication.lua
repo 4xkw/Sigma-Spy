@@ -49,13 +49,13 @@ function Module:GetCommCallback(Type: string): (...any) -> ...any
 end
 
 function Module:Communicate(...)
-    local Fire = Hook:Index(Channel, "Fire")
-    Fire(Channel, ...)
+    local Fire = Channel and Channel.Fire
+    return Fire and Fire(Channel, ...)
 end
 
 function Module:AddConnection(Callback): RBXScriptConnection
-    local Event = Hook:Index(Channel, "Event")
-    return Event:Connect(Callback)
+    local Event = Channel and Channel.Event
+    return Event and Event:Connect(Callback)
 end
 
 function Module:AddDefaultCallbacks(Event: BindableEvent)

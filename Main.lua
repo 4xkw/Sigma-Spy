@@ -73,6 +73,37 @@ local Ui = Modules.Ui
 local Generation = Modules.Generation
 local Communication = Modules.Communication
 
+--// Hotfix: make indexing safe for communication channel userdata
+do
+    -- Hook.Index guard for non-Instance objects
+    function Hook:Index(Object, Key)
+        if self.OrignalIndex and typeof(Object) == "Instance" then
+            return self.OrignalIndex(Object, Key)
+        end
+        return Object[Key]
+    end
+
+    local originalSetChannel = Communication.SetChannel
+    function Communication:SetChannel(ch)
+        self.Channel = ch
+        return originalSetChannel(self, ch)
+    end
+
+    function Communication:Communicate(...)
+        local ch = self.Channel
+        if ch and ch.Fire then
+            return ch.Fire(ch, ...)
+        end
+    end
+
+    function Communication:AddConnection(cb)
+        local ch = self.Channel
+        if ch and ch.Event then
+            return ch.Event:Connect(cb)
+        end
+    end
+end
+
 --// Unpack config
 local BlackListedServices = Config.BlackListedServices
 
